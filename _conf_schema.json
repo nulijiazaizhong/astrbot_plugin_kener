@@ -1,0 +1,74 @@
+{
+  "enabled": {
+    "description": "是否启用本插件(关掉后停止轮询,不推送)",
+    "type": "bool",
+    "default": true
+  },
+  "kener_base_url": {
+    "description": "Kener 站点地址(不带末尾斜杠)",
+    "type": "string",
+    "default": "https://status.ets2la.cn",
+    "hint": "例如 https://status.ets2la.cn 或 http://127.0.0.1:3000"
+  },
+  "kener_api_key": {
+    "description": "Kener API Key(kener_ 开头,管理后台 → API Keys 生成)",
+    "type": "string",
+    "default": "",
+    "secret": true
+  },
+  "push_targets": {
+    "description": "推送目标列表,每项一个 QQ 群号或频道 ID",
+    "type": "template_list",
+    "default": [],
+    "templates": {
+      "group": {
+        "name": "QQ 群",
+        "hint": "填群号(group_id),例如 123456789",
+        "display_item": "target_id",
+        "items": {
+          "target_id": {
+            "description": "群号(纯数字字符串)",
+            "type": "string",
+            "default": ""
+          },
+          "platform": {
+            "description": "平台适配器名",
+            "type": "string",
+            "default": "aiocqhttp",
+            "options": ["aiocqhttp", "qq_official", "qq_official_webhook"]
+          }
+        }
+      }
+    }
+  },
+  "poll_interval": {
+    "description": "轮询间隔(秒),建议 30~120",
+    "type": "int",
+    "default": 60,
+    "slider": { "min": 10, "max": 600, "step": 5 }
+  },
+  "watch_monitors": {
+    "description": "只关注这些 monitor tag(逗号分隔)。留空 = 关注全部",
+    "type": "string",
+    "default": "",
+    "hint": "填写 monitor tag,例如: game,api,web"
+  },
+  "backfill_on_start": {
+    "description": "插件启动时是否把当前 ONGOING 的事件补推一次",
+    "type": "bool",
+    "default": false,
+    "hint": "默认 false,避免重启 AstrBot 后重复推送;设为 true 则启动后立刻把进行中的维护推一次"
+  },
+  "enable_start_reminder": {
+    "description": "维护计划开始前是否推送提前提醒(⏰ 维护即将开始)",
+    "type": "bool",
+    "default": true,
+    "hint": "对 SCHEDULED/READY 状态的维护,提前 reminder_lead_minutes 分钟推送一次;每个事件只推一次,重启不会重复"
+  },
+  "reminder_lead_minutes": {
+    "description": "维护开始前多少分钟推送提醒(0 = 关闭)",
+    "type": "int",
+    "default": 30,
+    "slider": { "min": 0, "max": 1440, "step": 5 }
+  }
+}

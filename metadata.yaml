@@ -1,0 +1,12 @@
+name: astrbot_plugin_kener
+author: nulijiazaizhong
+version: 0.1.0
+repo: https://github.com/nulijiazaizhong/astrbot_plugin_kener
+desc: 在聊天里查询/管理 Kener 状态页与监控（状态、故障、维护窗口、徽章）。
+display_name: Kener 状态页
+short_desc: 聊天里看服务状态、故障与维护
+support_platforms:
+  - aiocqhttp
+  - qq_official
+  - qq_official_webhook
+astrbot_version: ">=4.9.2,<5"
